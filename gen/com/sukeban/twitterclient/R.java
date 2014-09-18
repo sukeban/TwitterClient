@@ -19,7 +19,7 @@ public final class R {
         public static final int btLogin=0x7f070004;
         public static final int etTweetContent=0x7f070002;
         public static final int ivUserAvatar=0x7f070000;
-        public static final int listView1=0x7f070003;
+        public static final int lvHomeFeed=0x7f070003;
         public static final int menu_compose=0x7f070007;
         public static final int menu_tweet=0x7f070008;
         public static final int tvTweetContent=0x7f070006;

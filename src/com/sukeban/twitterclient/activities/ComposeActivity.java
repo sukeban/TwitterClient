@@ -1,10 +1,8 @@
 package com.sukeban.twitterclient.activities;
 
 import com.sukeban.twitterclient.R;
-import com.sukeban.twitterclient.R.layout;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;

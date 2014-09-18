@@ -12,6 +12,8 @@ public class Tweet {
 	private boolean favorited;
 	private boolean retweeted;
     private User user;
+    
+    // TODO: add date and then do relative formatting
 
     public User getUser() {
         return user;

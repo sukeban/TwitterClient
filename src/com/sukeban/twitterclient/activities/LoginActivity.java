@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import com.codepath.oauth.OAuthLoginActivity;
 
@@ -35,8 +36,10 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		 Intent i = new Intent(this, HomeActivity.class);
-		 startActivity(i);
+		Toast.makeText(this, "Connented to Twitter", Toast.LENGTH_SHORT).show();
+
+		Intent i = new Intent(this, HomeActivity.class);
+		startActivity(i);
 	}
 
 	// OAuth authentication flow failed, handle the error
@@ -44,6 +47,7 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 	@Override
 	public void onLoginFailure(Exception e) {
 		e.printStackTrace();
+		Toast.makeText(this, "Could not connect to Twitter", Toast.LENGTH_SHORT).show();
 	}
 
 	// Click handler method for the button used to start OAuth flow

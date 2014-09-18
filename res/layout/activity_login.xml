@@ -11,6 +11,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="loginToRest"
-        android:text="Login" />
+        android:text="Connent to Twitter" />
 
 </RelativeLayout>

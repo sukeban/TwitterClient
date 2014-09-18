@@ -29,15 +29,15 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		if (convertView == null){
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tweet,parent,false);
 		}
-		
-		// TODO: populate the custom view
-		
+				
 		ImageView ivUserAvatar = (ImageView)convertView.findViewById(R.id.ivUserAvatar);
 		TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
 		TextView tvTweetDate = (TextView)convertView.findViewById(R.id.tvTweetDate);
-		TextView tvTweetContent = (TextView)convertView.findViewById(R.id.tvTweetContent);// TODO: this should render as html
+		TextView tvTweetContent = (TextView)convertView.findViewById(R.id.tvTweetContent);
 		
-				
+		tvUserName.setText(Html.fromHtml(tweetInfo.getUser().getName()));
+		tvTweetContent.setText(Html.fromHtml(tweetInfo.getBody())); // TODO: this should render as html
+
 		return convertView;
 	}
 }

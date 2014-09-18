@@ -21,7 +21,7 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	public void getHomeFeed(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("?nojsoncallback=1&method=statuses/home_timeline.json");
+		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		RequestParams params = new RequestParams();
 		params.put("format", "json");
 		client.get(apiUrl, params, handler);
