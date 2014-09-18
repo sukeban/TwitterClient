@@ -12,6 +12,7 @@ import com.sukeban.twitterclient.adapters.TweetAdapter;
 import com.sukeban.twitterclient.models.Tweet;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.sukeban.twitterclient.models.Tweet;
 
 public class HomeActivity extends Activity {
 
@@ -27,7 +31,9 @@ public class HomeActivity extends Activity {
 	private TweetAdapter tweetAdapter;
 	
 	private TwitterClient client;
-	
+		
+	private Context toastContext;
+
 	// TODO: infinite scroll
 	
 	@Override
@@ -40,19 +46,20 @@ public class HomeActivity extends Activity {
     	tweets = new ArrayList<Tweet>();
         tweetAdapter = new TweetAdapter(this, tweets);
         
+        toastContext = this;
+
         setupViews();
 
         lvHomeFeed.setAdapter(tweetAdapter);
                
         populateTimeline();
-
     }
 	
 	private void setupViews() {
         lvHomeFeed = (ListView)findViewById(R.id.lvHomeFeed);
 	}
 	
-	public void populateTimeline(){
+	public void populateTimeline() { // TODO: bool clear results?
 		client.getHomeFeed(new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
@@ -81,11 +88,34 @@ public class HomeActivity extends Activity {
     
     public void onAddItem(MenuItem m) {
     	Intent i = new Intent(this, ComposeActivity.class);
-    	startActivityForResult(i,5);// make it a constant
+    	startActivityForResult(i,5);// make 5 a constant declaration
     	
-    	// TODO: make a new scratch tweet
-    	// pass it to the compose intent
-    	// get it back when its closed to sent it up
-    	
+    	// TODO: get the user avatar and name and send it to the compose activity	
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if (requestCode == 5){
+    		if (resultCode == RESULT_OK){
+    			
+    			String status = data.getStringExtra("status");
+    			    			
+    			client.postTweet(new JsonHttpResponseHandler(){
+    				@Override
+    				public void onFailure(Throwable e, String s){
+    					Log.d("debug", e.toString());
+    					Log.d("debug", s.toString());
+    					
+    	    			Toast.makeText(toastContext, "Tweet failed!", Toast.LENGTH_SHORT).show();
+    				}
+    				
+    				@Override
+    				public void onSuccess(JSONArray jsonArray){
+    					Log.d("debug", jsonArray.toString());
+    	    			Toast.makeText(toastContext, "Tweet posted!", Toast.LENGTH_SHORT).show();
+    				}
+    			}, status);
+    		}
+    	}
     }
 }

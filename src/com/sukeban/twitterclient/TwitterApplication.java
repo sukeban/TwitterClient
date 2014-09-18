@@ -5,7 +5,7 @@ import android.content.Context;
 public class TwitterApplication extends com.activeandroid.app.Application {
 	private static Context context;
 	
-	// TODO: if not online color the UI
+	// TODO: if not online color the UI or show a toast 
 
 	@Override
 	public void onCreate() {

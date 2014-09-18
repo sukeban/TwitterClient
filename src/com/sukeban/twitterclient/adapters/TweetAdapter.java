@@ -7,8 +7,6 @@ import com.loopj.android.image.SmartImageView;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.models.Tweet;
 
-//import org.joda.time.DateTimeUtils;
-
 import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -40,8 +38,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 
 		TextView tvTweetDate = (TextView)convertView.findViewById(R.id.tvTweetDate);
 		Date date = tweetInfo.getDateCreated();
-		Date now = new Date();
-		tvTweetDate.setText(DateUtils.getRelativeTimeSpanString(date.getTime(), now.getTime(), DateUtils.SECOND_IN_MILLIS, 0));
+		tvTweetDate.setText(DateUtils.getRelativeTimeSpanString(date.getTime(), System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, 0));
 		
 		TextView tvTweetContent = (TextView)convertView.findViewById(R.id.tvTweetContent);	
 		tvTweetContent.setText(Html.fromHtml(tweetInfo.getBody()));

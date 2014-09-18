@@ -1,5 +1,9 @@
 package com.sukeban.twitterclient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -27,5 +31,11 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 	
-	// TODO: compose a tweet
+	public void postTweet(AsyncHttpResponseHandler handler, String status){
+		String apiUrl = getApiUrl("statuses/update.json");
+		RequestParams params = new RequestParams();
+		params.put("format", "json");
+		params.put("status", status);
+		client.post(apiUrl, params, handler);
+	}
 }
