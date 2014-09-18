@@ -4,13 +4,15 @@ import android.content.Context;
 
 public class TwitterApplication extends com.activeandroid.app.Application {
 	private static Context context;
+	
+	// TODO: if not online color the UI
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		TwitterApplication.context = this;
 		
-		// TODO: possibly allocate the image loader
+		// TODO: persistence
 	}
 
 	public static TwitterClient getRestClient() {

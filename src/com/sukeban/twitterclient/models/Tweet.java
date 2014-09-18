@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Tweet {
 	private String body;
@@ -13,7 +15,7 @@ public class Tweet {
 	private boolean retweeted;
     private User user;
     
-    // TODO: add date and then do relative formatting
+    private java.util.Date dateCreated;
 
     public User getUser() {
         return user;
@@ -34,6 +36,10 @@ public class Tweet {
     public boolean isRetweeted() {
         return retweeted;
     }
+    
+    public java.util.Date getDateCreated() {
+    	return dateCreated;
+    }
 
     public static Tweet fromJson(JSONObject jsonObject) {
         Tweet tweet = new Tweet();
@@ -42,7 +48,21 @@ public class Tweet {
         	tweet.uid = jsonObject.getLong("id");
         	tweet.favorited = jsonObject.getBoolean("favorited");
         	tweet.retweeted = jsonObject.getBoolean("retweeted");
-            tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        	
+        	 String LARGE_TWITTER_DATE_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
+        	 
+        	 SimpleDateFormat simple = new SimpleDateFormat(LARGE_TWITTER_DATE_FORMAT, Locale.ENGLISH);
+        	 String dateString = jsonObject.getString("created_at");
+        	 simple.setLenient(false);
+        	 tweet.dateCreated = null;
+        	 
+        	 try {
+        		 tweet.dateCreated = simple.parse(dateString);
+        		 //Log.d("debug", d.toString());
+        	 } catch (Exception e) {
+     			e.printStackTrace();
+        	 }
+        	 tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

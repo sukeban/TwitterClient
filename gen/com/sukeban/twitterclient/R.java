@@ -22,8 +22,8 @@ public final class R {
         public static final int lvHomeFeed=0x7f070003;
         public static final int menu_compose=0x7f070007;
         public static final int menu_tweet=0x7f070008;
-        public static final int tvTweetContent=0x7f070006;
-        public static final int tvTweetDate=0x7f070005;
+        public static final int tvTweetContent=0x7f070005;
+        public static final int tvTweetDate=0x7f070006;
         public static final int tvUserName=0x7f070001;
     }
     public static final class layout {

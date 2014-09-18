@@ -23,12 +23,12 @@ import android.widget.ListView;
 public class HomeActivity extends Activity {
 
 	private ListView lvHomeFeed;
-//	private EndlessGridViewScrollListener listener;
 	private ArrayList<Tweet> tweets;
 	private TweetAdapter tweetAdapter;
-//	private short pageCounter;
 	
 	private TwitterClient client;
+	
+	// TODO: infinite scroll
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +43,7 @@ public class HomeActivity extends Activity {
         setupViews();
 
         lvHomeFeed.setAdapter(tweetAdapter);
-        
- //       listener = new EndlessGridViewScrollListener();
- //       listener.setSearchActivity(this);
- //       gvResults.setOnScrollListener(listener);
-       
- //       pageCounter = 0;
-        
+               
         populateTimeline();
 
     }
