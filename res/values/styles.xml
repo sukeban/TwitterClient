@@ -2,11 +2,15 @@
 
     <style name="MyCustomTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
-    </style>
+    	<item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+        </style>
     
     <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#4298ED</item>
-        <item name="android:actionMenuTextColor">#FFFFFF</item>
+    </style>
+    
+    <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 </resources>

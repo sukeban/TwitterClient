@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/ivUserAvatar"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:contentDescription="Image Result"
+        android:contentDescription="User Avatar"
         android:scaleType="fitXY"
         android:src="@drawable/ic_launcher" />
 

@@ -34,7 +34,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		ivUserAvatar.setImageUrl(tweetInfo.getUser().getProfileImageUrl());
 
 		TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
-		tvUserName.setText(Html.fromHtml(tweetInfo.getUser().getName()));
+		tvUserName.setText(tweetInfo.getUser().getName());
 
 		TextView tvTweetDate = (TextView)convertView.findViewById(R.id.tvTweetDate);
 		Date date = tweetInfo.getDateCreated();

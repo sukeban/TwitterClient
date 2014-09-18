@@ -3,6 +3,7 @@ package com.sukeban.twitterclient.activities;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sukeban.twitterclient.R;
@@ -10,6 +11,7 @@ import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
 import com.sukeban.twitterclient.adapters.TweetAdapter;
 import com.sukeban.twitterclient.models.Tweet;
+import com.sukeban.twitterclient.models.User;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,6 +35,8 @@ public class HomeActivity extends Activity {
 	private TwitterClient client;
 		
 	private Context toastContext;
+	
+	private User loggedInUser;
 
 	// TODO: infinite scroll
 	
@@ -52,6 +56,7 @@ public class HomeActivity extends Activity {
 
         lvHomeFeed.setAdapter(tweetAdapter);
                
+        getUserInfo();
         populateTimeline();
     }
 	
@@ -59,7 +64,7 @@ public class HomeActivity extends Activity {
         lvHomeFeed = (ListView)findViewById(R.id.lvHomeFeed);
 	}
 	
-	public void populateTimeline() { // TODO: bool clear results?
+	public void populateTimeline() { // TODO: add bool clear results
 		client.getHomeFeed(new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
@@ -76,21 +81,37 @@ public class HomeActivity extends Activity {
 			}
 		});
 	}
+	
+	public void getUserInfo() {
+		client.getLoggedInUserInfo(new JsonHttpResponseHandler(){
+			@Override
+			public void onFailure(Throwable e, String s){
+				Log.d("debug", e.toString());
+				Log.d("debug", s.toString());
+			}
+			
+			@Override
+			public void onSuccess(JSONObject jsonObject){
+				Log.d("debug", jsonObject.toString());	
+				loggedInUser = User.fromJson(jsonObject);
+			}
+		});
+	}
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.composemenu, menu);
+        // TODO: a refresh button on the action bar will force a reload
     	return true;
 	} 
     
-    // TODO: a refresh button on the action bar will force a reload
     
     public void onAddItem(MenuItem m) {
     	Intent i = new Intent(this, ComposeActivity.class);
-    	startActivityForResult(i,5);// make 5 a constant declaration
-    	
-    	// TODO: get the user avatar and name and send it to the compose activity	
+    	i.putExtra("avatarUrl", loggedInUser.getProfileImageUrl());
+    	i.putExtra("name", loggedInUser.getName());
+    	startActivityForResult(i,5);// make 5 a constant declaration    	
     }
     
     @Override
@@ -113,6 +134,8 @@ public class HomeActivity extends Activity {
     				public void onSuccess(JSONArray jsonArray){
     					Log.d("debug", jsonArray.toString());
     	    			Toast.makeText(toastContext, "Tweet posted!", Toast.LENGTH_SHORT).show();
+    	    			
+    	    			// TODO: make sure the new tweet is visible
     				}
     			}, status);
     		}

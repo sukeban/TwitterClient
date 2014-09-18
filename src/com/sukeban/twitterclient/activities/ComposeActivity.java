@@ -1,14 +1,17 @@
 package com.sukeban.twitterclient.activities;
 
+import com.loopj.android.image.SmartImageView;
 import com.sukeban.twitterclient.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ComposeActivity extends Activity {
@@ -17,8 +20,14 @@ public class ComposeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compose);
+				
+		SmartImageView ivUserAvatar = (SmartImageView)findViewById(R.id.ivUserAvatar);
+		String avatarUrl = getIntent().getStringExtra("avatarUrl");
+		ivUserAvatar.setImageUrl(avatarUrl);
 		
-		// TODO: populate the avatar and username using intent data
+		TextView tvUserName = (TextView)findViewById(R.id.tvUserName);
+		String userName = getIntent().getStringExtra("name");
+		tvUserName.setText(userName);
 	}
 	
 	@Override

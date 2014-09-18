@@ -56,8 +56,9 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050002;
+        public static final int AppBaseTheme=0x7f050003;
         public static final int MyActionBarTheme=0x7f050001;
+        public static final int MyActionBarTitleText=0x7f050002;
         public static final int MyCustomTheme=0x7f050000;
     }
 }
