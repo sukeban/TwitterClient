@@ -141,14 +141,11 @@ public class HomeActivity extends Activity {
     				}
     				
     				@Override
-    				public void onSuccess(JSONArray jsonArray){
-    					Log.d("debug", jsonArray.toString());
-    					System.out.println("debug" + jsonArray.length());
+    				public void onSuccess(JSONObject jsonObject){
+    					Log.d("debug", jsonObject.toString());
     	    			Toast.makeText(toastContext, "Tweet posted!", Toast.LENGTH_SHORT).show();
-    	    			
-    	    			// TODO: make sure the new tweet is visible at the top 
-    	    			//JSONObject jsonObject = Tweet.fromJSON(json);
-    	    			//tweetAdapter.insert(jsonObject,0);
+    	    			Tweet tweet = Tweet.fromJson(jsonObject);
+    	    			tweetAdapter.insert(tweet,0);
     				}
     			}, status);
     		}
