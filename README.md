@@ -26,5 +26,6 @@ There are a few fixes needed:
  * [x] And when the list view item is being reused, I should clear the image right away, right now it switches from the old image to the new one.
 
 Walkthrough of all user stories:
+(Note, sometimes the emulator and LICECap don't play nicely. Notice a few keystrokes and the login screen didn't get captured. But they are there.)
 
 ![Video Walkthrough](twitterClient.gif)
