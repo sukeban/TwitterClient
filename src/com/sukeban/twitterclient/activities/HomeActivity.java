@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sukeban.twitterclient.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
@@ -24,8 +25,6 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sukeban.twitterclient.models.Tweet;
-
 public class HomeActivity extends Activity {
 
 	private ListView lvHomeFeed;
@@ -38,7 +37,7 @@ public class HomeActivity extends Activity {
 	
 	private User loggedInUser;
 
-	// TODO: infinite scroll
+	private EndlessListViewScrollListener listener;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,23 @@ public class HomeActivity extends Activity {
         setupViews();
 
         lvHomeFeed.setAdapter(tweetAdapter);
-               
+        listener = new EndlessListViewScrollListener();
+        listener.setHomeActivity(this);
+        lvHomeFeed.setOnScrollListener(listener);
+        
         getUserInfo();
-        populateTimeline();
+        populateTimeline(true);
     }
 	
 	private void setupViews() {
         lvHomeFeed = (ListView)findViewById(R.id.lvHomeFeed);
 	}
 	
-	public void populateTimeline() { // TODO: add bool clear results
+	 public void getMore() {
+	    	this.populateTimeline(false);
+	    }
+	
+	public void populateTimeline(final boolean clear) {
 		client.getHomeFeed(new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
@@ -75,6 +81,10 @@ public class HomeActivity extends Activity {
 			@Override
 			public void onSuccess(JSONArray jsonArray){
 				Log.d("debug", jsonArray.toString());	
+				if (clear == true)
+				{
+					tweetAdapter.clear();
+				}
 				tweetAdapter.addAll(Tweet.fromJson(jsonArray));
 				
 				// TODO: show a spinner until the results come in
@@ -133,9 +143,12 @@ public class HomeActivity extends Activity {
     				@Override
     				public void onSuccess(JSONArray jsonArray){
     					Log.d("debug", jsonArray.toString());
+    					System.out.println("debug" + jsonArray.length());
     	    			Toast.makeText(toastContext, "Tweet posted!", Toast.LENGTH_SHORT).show();
     	    			
-    	    			// TODO: make sure the new tweet is visible
+    	    			// TODO: make sure the new tweet is visible at the top 
+    	    			//JSONObject jsonObject = Tweet.fromJSON(json);
+    	    			//tweetAdapter.insert(jsonObject,0);
     				}
     			}, status);
     		}

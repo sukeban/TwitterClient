@@ -12,7 +12,7 @@ public class TwitterApplication extends com.activeandroid.app.Application {
 		super.onCreate();
 		TwitterApplication.context = this;
 		
-		// TODO: persistence
+		// TODO: persistence SQListeOpenHelper
 	}
 
 	public static TwitterClient getRestClient() {

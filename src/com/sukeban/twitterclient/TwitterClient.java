@@ -1,9 +1,5 @@
 package com.sukeban.twitterclient;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 

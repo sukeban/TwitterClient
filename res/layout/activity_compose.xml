@@ -13,7 +13,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="User Avatar"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon_user" />
 
     <TextView
         android:id="@+id/tvUserName"

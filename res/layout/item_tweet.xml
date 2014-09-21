@@ -5,13 +5,13 @@
     android:orientation="vertical" >
 
    <com.loopj.android.image.SmartImageView
-        android:id="@+id/ivUserAvatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="Image Result"
-        android:src="@drawable/ic_launcher" />
+       android:id="@+id/ivUserAvatar"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:contentDescription="Image Result"
+       android:src="@drawable/icon_user" />
 
     <TextView
         android:id="@+id/tvUserName"
