@@ -3,6 +3,7 @@ package com.sukeban.twitterclient.activities;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -38,6 +39,7 @@ public class HomeActivity extends Activity {
 	private User loggedInUser;
 
 	private EndlessListViewScrollListener listener;
+	private long maxId;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class HomeActivity extends Activity {
         
         getUserInfo();
         populateTimeline(true);
+        
+        maxId = 0;
     }
 	
 	private void setupViews() {
@@ -71,7 +75,8 @@ public class HomeActivity extends Activity {
 	    }
 	
 	public void populateTimeline(final boolean clear) {
-		client.getHomeFeed(new JsonHttpResponseHandler(){
+		
+		client.getHomeFeed(maxId, new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
 				Log.d("debug", e.toString());
@@ -84,6 +89,19 @@ public class HomeActivity extends Activity {
 				if (clear == true)
 				{
 					tweetAdapter.clear();
+					maxId = 0;
+				}	
+				
+				int length = jsonArray.length();
+				JSONObject lastObject = null;
+				try{
+					lastObject = jsonArray.getJSONObject(length-1);
+				} catch (JSONException e){
+        			e.printStackTrace();
+				}
+				if (lastObject != null){
+					Tweet last = Tweet.fromJson(lastObject);
+					maxId = last.getId();
 				}
 				tweetAdapter.addAll(Tweet.fromJson(jsonArray));
 				
@@ -102,7 +120,7 @@ public class HomeActivity extends Activity {
 			
 			@Override
 			public void onSuccess(JSONObject jsonObject){
-				Log.d("debug", jsonObject.toString());	
+				Log.d("debug", jsonObject.toString());
 				loggedInUser = User.fromJson(jsonObject);
 			}
 		});
