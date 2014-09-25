@@ -2,9 +2,11 @@
 <resources>
 
     <string name="app_name">TwitterClient</string>
-     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_compose">ComposeActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

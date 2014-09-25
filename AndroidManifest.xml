@@ -11,13 +11,13 @@
         android:targetSdkVersion="19" />
 
     <application
-        android:name="com.sukeban.twitterclient.TwitterApplication"
+        android:name=".TwitterApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyCustomTheme" >
-		<activity
-            android:name="com.sukeban.twitterclient.activities.LoginActivity"
+        <activity
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,6 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home" >
@@ -43,6 +42,14 @@
         <activity
             android:name=".activities.ComposeActivity"
             android:label="@string/title_activity_compose" >
+        </activity>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.sukeban.twitterclient.activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 

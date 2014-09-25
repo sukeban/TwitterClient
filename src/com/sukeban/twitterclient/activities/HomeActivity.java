@@ -23,20 +23,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends TimelineActivity { // todo, can generalize the view to be one that shows a feed
+	
+	private User loggedInUser;
+
+	private Context toastContext;
 
 	private ListView lvHomeFeed;
 	private ArrayList<Tweet> tweets;
 	private TweetAdapter tweetAdapter;
 	
 	private TwitterClient client;
-		
-	private Context toastContext;
-	
-	private User loggedInUser;
 
 	private EndlessListViewScrollListener listener;
 	private long maxId;
@@ -57,7 +58,7 @@ public class HomeActivity extends Activity {
 
         lvHomeFeed.setAdapter(tweetAdapter);
         listener = new EndlessListViewScrollListener();
-        listener.setHomeActivity(this);
+        listener.setActivity(this);
         lvHomeFeed.setOnScrollListener(listener);
         
         getUserInfo();
@@ -70,9 +71,9 @@ public class HomeActivity extends Activity {
         lvHomeFeed = (ListView)findViewById(R.id.lvHomeFeed);
 	}
 	
-	 public void getMore() {
-	    	this.populateTimeline(false);
-	    }
+	public void getMore() {
+	   this.populateTimeline(false);
+	}
 	
 	public void populateTimeline(final boolean clear) {
 		
@@ -130,16 +131,21 @@ public class HomeActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.composemenu, menu);
-        // TODO: a refresh button on the action bar will force a reload
     	return true;
 	} 
     
-    
     public void onAddItem(MenuItem m) {
     	Intent i = new Intent(this, ComposeActivity.class);
+    	
+    	// TODO: this could take a user also
+    	
     	i.putExtra("avatarUrl", loggedInUser.getProfileImageUrl());
     	i.putExtra("name", loggedInUser.getName());
     	startActivityForResult(i,5);// make 5 a constant declaration    	
+    }
+    
+    public void onViewProfile(MenuItem m) {
+    	this.launchProfile(loggedInUser); 	
     }
     
     @Override
@@ -168,5 +174,18 @@ public class HomeActivity extends Activity {
     			}, status);
     		}
     	}
+    }
+    
+    public void launchProfile(User user){
+		Intent i = new Intent(this, ProfileActivity.class);
+		i.putExtra("user", user);
+    	startActivityForResult(i,10);// make 10 a constant declaration  
+    }
+    
+    public void onImageClick(View v){
+		//Toast.makeText(toastContext, "Clicked!", Toast.LENGTH_SHORT).show();
+		Tweet tweet = tweets.get((Integer)v.getTag());
+		User user = tweet.getUser();
+		this.launchProfile(user);
     }
 }

@@ -11,6 +11,7 @@
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
        android:contentDescription="Image Result"
+       android:onClick="onImageClick"
        android:src="@drawable/icon_user" />
 
     <TextView

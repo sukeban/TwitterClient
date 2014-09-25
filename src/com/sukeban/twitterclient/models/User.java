@@ -1,10 +1,15 @@
 package com.sukeban.twitterclient.models;
 
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class User {
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String name;
+	private String tagLine;
 	private long uid;
 	private String screenName;
 	private String profileImageUrl;
@@ -18,6 +23,10 @@ public class User {
 
     public long getId() {
         return uid;
+    }
+    
+    public String getTagLine() {
+        return tagLine;
     }
 
     public String getScreenName() {
@@ -45,6 +54,7 @@ public class User {
         try {
         	u.name = json.getString("name");
         	u.uid = json.getLong("id");
+        	u.tagLine = json.getString("description");
         	u.screenName = json.getString("screen_name");
         	u.profileImageUrl = json.getString("profile_image_url");
         	u.numTweets = json.getInt("statuses_count");
