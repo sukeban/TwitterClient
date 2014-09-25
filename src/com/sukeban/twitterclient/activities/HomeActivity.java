@@ -15,7 +15,6 @@ import com.sukeban.twitterclient.adapters.TweetAdapter;
 import com.sukeban.twitterclient.models.Tweet;
 import com.sukeban.twitterclient.models.User;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HomeActivity extends TimelineActivity { // todo, can generalize the view to be one that shows a feed
+public class HomeActivity extends TimelineActivity {
 	
 	private User loggedInUser;
 
@@ -75,6 +74,8 @@ public class HomeActivity extends TimelineActivity { // todo, can generalize the
 	   this.populateTimeline(false);
 	}
 	
+	// TODO: add a indetermininte progress view around each client call then stop on success or failure
+
 	public void populateTimeline(final boolean clear) {
 		
 		client.getHomeFeed(maxId, new JsonHttpResponseHandler(){

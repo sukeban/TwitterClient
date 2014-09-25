@@ -48,8 +48,12 @@
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="com.sukeban.twitterclient.activities.ProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.sukeban.twitterclient.activities.MentionsActivity"
+            android:label="@string/title_activity_mentions" >
         </activity>
     </application>
 
