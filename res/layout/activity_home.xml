@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.sukeban.twitterclient.fragments.TweetsListFragment"
+        android:name="com.sukeban.twitterclient.fragments.HomeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

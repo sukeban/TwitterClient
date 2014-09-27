@@ -1,22 +1,18 @@
 package com.sukeban.twitterclient;
 
-import android.util.Log;
-
-import com.sukeban.twitterclient.baseclasses.TimelineActivity;
-
+import com.sukeban.twitterclient.baseclasses.EndlessListViewFragment;
+import com.sukeban.twitterclient.fragments.TweetsListFragment;
 
 public class EndlessListViewScrollListener extends EndlessScrollListener {
 
-	private TimelineActivity activity;
+	private EndlessListViewFragment fragment;
 	
-	public void setActivity(TimelineActivity activity) {
-		this.activity = activity;
+	public void setFragment(EndlessListViewFragment fragment) {
+		this.fragment = fragment;
 	}
 
 	@Override
 	public void onLoadMore(int page, int totalItemsCount) {
-		this.activity.getMore();		
-		Log.d("DEBUG","here");
+		this.fragment.getMore();		
 	}
-
 }
