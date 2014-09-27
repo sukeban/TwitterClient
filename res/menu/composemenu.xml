@@ -10,7 +10,7 @@
 		 />
 		<item
 		android:id="@+id/menu_profile"
-		android:icon="@drawable/icon_user"
+		android:icon="@drawable/icon_profile"
 		android:onClick="onViewProfile"
 		android:showAsAction="always"
 		android:title="Profile"

@@ -13,8 +13,11 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int icon_compose=0x7f020001;
-        public static final int icon_tweet=0x7f020002;
-        public static final int icon_user=0x7f020003;
+        public static final int icon_home=0x7f020002;
+        public static final int icon_mentions=0x7f020003;
+        public static final int icon_profile=0x7f020004;
+        public static final int icon_tweet=0x7f020005;
+        public static final int icon_user=0x7f020006;
     }
     public static final class id {
         public static final int btLogin=0x7f070004;
