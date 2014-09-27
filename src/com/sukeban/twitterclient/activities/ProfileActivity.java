@@ -10,6 +10,7 @@ import com.sukeban.twitterclient.models.User;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import android.view.View;
 import android.widget.TextView;
 
 public class ProfileActivity extends FragmentActivity {
@@ -51,4 +52,8 @@ public class ProfileActivity extends FragmentActivity {
 		String tagLine = user.getTagLine();
 		tvTagLine.setText(tagLine);
 	}
+	
+	public void onImageClick(View v){
+    	fragment.onImageClick(v);
+    }
 }

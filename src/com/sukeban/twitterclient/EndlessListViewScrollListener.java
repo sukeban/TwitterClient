@@ -1,7 +1,6 @@
 package com.sukeban.twitterclient;
 
 import com.sukeban.twitterclient.baseclasses.EndlessListViewFragment;
-import com.sukeban.twitterclient.fragments.TweetsListFragment;
 
 public class EndlessListViewScrollListener extends EndlessScrollListener {
 

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class HomeActivity extends FragmentActivity {
@@ -51,6 +52,10 @@ public class HomeActivity extends FragmentActivity {
     	i.putExtra("avatarUrl", loggedInUser.getProfileImageUrl()); // TODO: could send User
     	i.putExtra("name", loggedInUser.getName());
     	startActivityForResult(i,5);// make 5 a constant declaration    	
+    }
+    
+    public void onImageClick(View v){
+    	fragment.onImageClick(v);
     }
     
     public void onViewProfile(MenuItem m) {
