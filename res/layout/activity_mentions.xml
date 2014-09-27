@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ListView
-        android:id="@+id/lvMentions"
-        android:layout_width="match_parent"
+    <fragment
+        android:id="@+id/fragment_mentions"
+        android:name="com.sukeban.twitterclient.fragments.TweetsListFragment"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-    </ListView>
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

@@ -25,16 +25,6 @@
         android:text="Followers"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <ListView
-        android:id="@+id/lvTweets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvFollowing"
-        android:layout_marginTop="25dp" >
-
-    </ListView>
-
     <com.loopj.android.image.SmartImageView
         android:id="@+id/ivUserProfileAvatar"
         android:layout_width="wrap_content"
@@ -79,5 +69,14 @@
         android:layout_marginRight="29dp"
         android:text="Followers"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="com.sukeban.twitterclient.fragments.TweetsListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvFollowing" />
 
 </RelativeLayout>

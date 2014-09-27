@@ -1,6 +1,5 @@
 package com.sukeban.twitterclient.activities;
 
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +10,8 @@ import com.sukeban.twitterclient.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
-import com.sukeban.twitterclient.adapters.TweetAdapter;
+import com.sukeban.twitterclient.baseclasses.TimelineActivity;
+import com.sukeban.twitterclient.fragments.TweetsListFragment;
 import com.sukeban.twitterclient.models.Tweet;
 import com.sukeban.twitterclient.models.User;
 
@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class HomeActivity extends TimelineActivity {
@@ -31,44 +30,32 @@ public class HomeActivity extends TimelineActivity {
 	private User loggedInUser;
 
 	private Context toastContext;
-
-	private ListView lvHomeFeed;
-	private ArrayList<Tweet> tweets;
-	private TweetAdapter tweetAdapter;
 	
+	private long maxId;
 	private TwitterClient client;
 
 	private EndlessListViewScrollListener listener;
-	private long maxId;
+	private TweetsListFragment fragment;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         
-        client = TwitterApplication.getRestClient();
-
-    	tweets = new ArrayList<Tweet>();
-        tweetAdapter = new TweetAdapter(this, tweets);
-        
         toastContext = this;
 
-        setupViews();
+        fragment = (TweetsListFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_home);   
 
-        lvHomeFeed.setAdapter(tweetAdapter);
         listener = new EndlessListViewScrollListener();
         listener.setActivity(this);
-        lvHomeFeed.setOnScrollListener(listener);
+        fragment.setOnScrollListener(listener);
         
-        getUserInfo();
-        populateTimeline(true);
-        
+        client = TwitterApplication.getRestClient();
         maxId = 0;
+        getUserInfo();
+        populateTimeline(true);      
     }
 	
-	private void setupViews() {
-        lvHomeFeed = (ListView)findViewById(R.id.lvHomeFeed);
-	}
 	
 	public void getMore() {
 	   this.populateTimeline(false);
@@ -90,7 +77,7 @@ public class HomeActivity extends TimelineActivity {
 				Log.d("debug", jsonArray.toString());	
 				if (clear == true)
 				{
-					tweetAdapter.clear();
+					fragment.clear();
 					maxId = 0;
 				}	
 				
@@ -105,7 +92,7 @@ public class HomeActivity extends TimelineActivity {
 					Tweet last = Tweet.fromJson(lastObject);
 					maxId = last.getId();
 				}
-				tweetAdapter.addAll(Tweet.fromJson(jsonArray));
+				fragment.addAll(Tweet.fromJson(jsonArray));
 				
 				// TODO: show a spinner until the results come in
 			}
@@ -138,7 +125,7 @@ public class HomeActivity extends TimelineActivity {
     public void onAddItem(MenuItem m) {
     	Intent i = new Intent(this, ComposeActivity.class);
     	
-    	// TODO: this could take a user also
+    	// TODO: this could take a user also, but this is such a small aomut of info
     	
     	i.putExtra("avatarUrl", loggedInUser.getProfileImageUrl());
     	i.putExtra("name", loggedInUser.getName());
@@ -170,7 +157,7 @@ public class HomeActivity extends TimelineActivity {
     					Log.d("debug", jsonObject.toString());
     	    			Toast.makeText(toastContext, "Tweet posted!", Toast.LENGTH_SHORT).show();
     	    			Tweet tweet = Tweet.fromJson(jsonObject);
-    	    			tweetAdapter.insert(tweet,0);
+    	    			fragment.insert(tweet,0);
     				}
     			}, status);
     		}
@@ -184,8 +171,7 @@ public class HomeActivity extends TimelineActivity {
     }
     
     public void onImageClick(View v){
-		//Toast.makeText(toastContext, "Clicked!", Toast.LENGTH_SHORT).show();
-		Tweet tweet = tweets.get((Integer)v.getTag());
+		Tweet tweet = fragment.getTweet((Integer)v.getTag());
 		User user = tweet.getUser();
 		this.launchProfile(user);
     }

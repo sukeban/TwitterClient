@@ -1,6 +1,5 @@
 package com.sukeban.twitterclient.activities;
 
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,8 @@ import com.sukeban.twitterclient.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
-import com.sukeban.twitterclient.adapters.TweetAdapter;
+import com.sukeban.twitterclient.baseclasses.TimelineActivity;
+import com.sukeban.twitterclient.fragments.TweetsListFragment;
 import com.sukeban.twitterclient.models.Tweet;
 import com.sukeban.twitterclient.models.User;
 
@@ -21,21 +21,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class ProfileActivity extends TimelineActivity {
 	
 	private User user;
-
-	private ListView lvTweets;
-	private ArrayList<Tweet> tweets;
-	private TweetAdapter tweetAdapter;
 	
+	private long maxId;
 	private TwitterClient client;
 	
 	private EndlessListViewScrollListener listener;
-	private long maxId;
+	private TweetsListFragment fragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +40,21 @@ public class ProfileActivity extends TimelineActivity {
 		
 		user = (User)getIntent().getSerializableExtra("user");
 
-        client = TwitterApplication.getRestClient();
-
-    	tweets = new ArrayList<Tweet>();
-        tweetAdapter = new TweetAdapter(this, tweets);
-        
         setupViews();
 
-        lvTweets.setAdapter(tweetAdapter);
         listener = new EndlessListViewScrollListener();
         listener.setActivity(this);
-        lvTweets.setOnScrollListener(listener);
-        
-        populateTimeline(true);
-        
+        fragment.setOnScrollListener(listener);
+                
         maxId = 0;
+        client = TwitterApplication.getRestClient();
+        populateTimeline(true);
 	}
 	
 	private void setupViews() {
-        lvTweets = (ListView)findViewById(R.id.lvTweets);
-				
+		
+        fragment = (TweetsListFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_profile);   
+		
 		SmartImageView ivUserAvatar = (SmartImageView)findViewById(R.id.ivUserProfileAvatar);
 		String avatarUrl = user.getProfileImageUrl();
 		ivUserAvatar.setImageUrl(avatarUrl);
@@ -110,7 +101,7 @@ public class ProfileActivity extends TimelineActivity {
 				Log.d("debug", jsonArray.toString());	
 				if (clear == true)
 				{
-					tweetAdapter.clear();
+					fragment.clear();
 					maxId = 0;
 				}	
 				
@@ -125,7 +116,7 @@ public class ProfileActivity extends TimelineActivity {
 					Tweet last = Tweet.fromJson(lastObject);
 					maxId = last.getId();
 				}
-				tweetAdapter.addAll(Tweet.fromJson(jsonArray));
+				fragment.addAll(Tweet.fromJson(jsonArray));
 				
 				// TODO: show a spinner until the results come in
 			}

@@ -1,7 +1,8 @@
 package com.sukeban.twitterclient;
 
 import android.util.Log;
-import com.sukeban.twitterclient.activities.TimelineActivity;
+
+import com.sukeban.twitterclient.baseclasses.TimelineActivity;
 
 
 public class EndlessListViewScrollListener extends EndlessScrollListener {

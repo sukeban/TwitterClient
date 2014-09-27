@@ -1,7 +1,5 @@
 package com.sukeban.twitterclient.activities;
 
-import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,49 +9,35 @@ import com.sukeban.twitterclient.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
-import com.sukeban.twitterclient.adapters.TweetAdapter;
+import com.sukeban.twitterclient.baseclasses.TimelineActivity;
+import com.sukeban.twitterclient.fragments.TweetsListFragment;
 import com.sukeban.twitterclient.models.Tweet;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
 
 public class MentionsActivity extends TimelineActivity {
 	
-	private ListView lvMentions;
-	private ArrayList<Tweet> mentions;
-	private TweetAdapter mentionsAdapter;
-
+	private long maxId;
 	private TwitterClient client;
 	
+	private TweetsListFragment fragment;
 	private EndlessListViewScrollListener listener;
-	private long maxId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mentions);
-		
-		client = TwitterApplication.getRestClient();
-
-		mentions = new ArrayList<Tweet>();
-		mentionsAdapter = new TweetAdapter(this, mentions);
 	        
-	    setupViews();
+        fragment = (TweetsListFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_mentions);   
 
-	    lvMentions.setAdapter(mentionsAdapter);
-	    listener = new EndlessListViewScrollListener();
-	    listener.setActivity(this);
-	    lvMentions.setOnScrollListener(listener);
-	        
-	    getMentions(true);
+        listener = new EndlessListViewScrollListener();
+        listener.setActivity(this);
+        fragment.setOnScrollListener(listener);
 	        
 	    maxId = 0;
-		
-	}
-	
-	private void setupViews() {
-		lvMentions = (ListView)findViewById(R.id.lvMentions);
+		client = TwitterApplication.getRestClient();
+	    getMentions(true);
 	}
 	
 	public void getMore() {
@@ -74,7 +58,7 @@ public class MentionsActivity extends TimelineActivity {
 				Log.d("debug", jsonArray.toString());	
 				if (clear == true)
 				{
-					mentionsAdapter.clear();
+					fragment.clear();
 					maxId = 0;
 				}	
 				
@@ -89,7 +73,7 @@ public class MentionsActivity extends TimelineActivity {
 					Tweet last = Tweet.fromJson(lastObject);
 					maxId = last.getId();
 				}
-				mentionsAdapter.addAll(Tweet.fromJson(jsonArray));
+				fragment.addAll(Tweet.fromJson(jsonArray));
 				
 				// TODO: show a spinner until the results come in
 			}
