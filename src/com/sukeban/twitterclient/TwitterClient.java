@@ -15,7 +15,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_KEY = "sqEL4M9Oxfu1voXeQ52Zgl1KT";
 	public static final String REST_CONSUMER_SECRET = "5graH0XE7FECqawNxoyPyw3lDo0ovfGY0g4yFItrZPIjdkmgH8"; 
 	public static final String REST_CALLBACK_URL = "oauth://cpbasictweets";
-
+	
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}

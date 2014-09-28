@@ -1,4 +1,4 @@
-package com.sukeban.twitterclient;
+package com.sukeban.twitterclient.listeners;
 
 import com.sukeban.twitterclient.baseclasses.EndlessListViewFragment;
 

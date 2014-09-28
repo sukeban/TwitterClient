@@ -2,11 +2,11 @@ package com.sukeban.twitterclient.fragments;
 
 import java.util.ArrayList;
 
-import com.sukeban.twitterclient.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.activities.ProfileActivity;
 import com.sukeban.twitterclient.adapters.TweetAdapter;
 import com.sukeban.twitterclient.baseclasses.EndlessListViewFragment;
+import com.sukeban.twitterclient.listeners.EndlessListViewScrollListener;
 import com.sukeban.twitterclient.models.Tweet;
 import com.sukeban.twitterclient.models.User;
 

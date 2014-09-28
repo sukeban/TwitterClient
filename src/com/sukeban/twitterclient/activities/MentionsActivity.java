@@ -14,7 +14,7 @@ public class MentionsActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_mentions);  
+        setContentView(R.layout.activity_mentions);  
         fragment = (MentionsFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_mentions);   
 	}
 	

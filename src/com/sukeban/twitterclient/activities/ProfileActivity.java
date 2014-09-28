@@ -8,8 +8,8 @@ import com.sukeban.twitterclient.fragments.ProfileFragment;
 import com.sukeban.twitterclient.models.User;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +21,7 @@ public class ProfileActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile);	
+        setContentView(R.layout.activity_profile);	
 		
 		user = (User)getIntent().getSerializableExtra("user");
         setupViews();

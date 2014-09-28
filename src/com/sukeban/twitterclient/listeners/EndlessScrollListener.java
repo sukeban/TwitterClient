@@ -1,4 +1,4 @@
-package com.sukeban.twitterclient;
+package com.sukeban.twitterclient.listeners;
 
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;

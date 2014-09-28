@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -19,8 +18,57 @@
         android:layout_toRightOf="@+id/ivUserProfileAvatar"
         android:text="User Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+       <TextView
+        android:id="@+id/tvTagLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvUserProfileName"
+        android:layout_below="@+id/tvUserProfileName"
+        android:text="Tag Line"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <fragment
+   	<TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTagLine"
+        android:layout_alignLeft="@+id/tvUserProfileName"
+        android:text="Following"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     <TextView
+        android:id="@+id/tvFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="Following"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+   <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTagLine"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/tvFollowing"
+        android:text="Followers"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="Followers"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+        <fragment
         android:id="@+id/fragment_profile"
         android:name="com.sukeban.twitterclient.fragments.ProfileFragment"
         android:layout_width="wrap_content"
@@ -28,53 +76,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/tvFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:text="Followers"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvFollowing"
-        android:layout_alignBottom="@+id/tvFollowing"
-        android:layout_toLeftOf="@+id/tvFollowers"
-        android:text="Followers"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ivUserProfileAvatar"
-        android:layout_marginTop="16dp"
-        android:text="Following"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/tvFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignRight="@+id/tvUserProfileName"
-        android:text="Following"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvTagLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvUserProfileName"
-        android:layout_below="@+id/tvUserProfileName"
-        android:text="Tag Line"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
 
 </RelativeLayout>

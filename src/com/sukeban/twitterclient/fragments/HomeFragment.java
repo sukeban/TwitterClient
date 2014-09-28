@@ -6,14 +6,22 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sukeban.twitterclient.R;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
 import com.sukeban.twitterclient.models.Tweet;
 
 public class HomeFragment extends TweetsListFragment {
 	
+	private ProgressBar progressBar;
+
 	private long maxId;
 	private TwitterClient client;	
 	
@@ -26,19 +34,29 @@ public class HomeFragment extends TweetsListFragment {
         populateTimeline(true);
 	}
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = super.onCreateView(inflater, container, savedInstanceState);
+		//this.progressShowingActivity = (ProgressFragmentActivity)getActivity();
+		return v;
+	}
+	
 	public void getMore() {
 		this.populateTimeline(false);
 	}
 	
-	// TODO: add a indetermininte progress view around each client call then stop on success or failure
-
 	public void populateTimeline(final boolean clear) {
+		
+		//progressShowingActivity.showProgressBar();
 			
 		client.getHomeFeed(maxId, new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
+				
 				Log.d("debug", e.toString());
 				Log.d("debug", s.toString());
+				
+				//progressShowingActivity.hideProgressBar();
 			}
 				
 			@Override
@@ -63,7 +81,7 @@ public class HomeFragment extends TweetsListFragment {
 				}
 				addAll(Tweet.fromJson(jsonArray));
 					
-				// TODO: show a spinner until the results come in
+				//progressShowingActivity.hideProgressBar();
 			}
 		});
 	}
