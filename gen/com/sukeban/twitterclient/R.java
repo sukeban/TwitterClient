@@ -20,26 +20,27 @@ public final class R {
         public static final int icon_user=0x7f020006;
     }
     public static final class id {
-        public static final int btLogin=0x7f070004;
+        public static final int btLogin=0x7f070005;
         public static final int etTweetContent=0x7f070002;
         public static final int flContainer=0x7f070003;
-        public static final int fragment_mentions=0x7f070005;
-        public static final int fragment_profile=0x7f07000d;
+        public static final int fragment_mentions=0x7f070006;
+        public static final int fragment_profile=0x7f07000e;
         public static final int ivUserAvatar=0x7f070000;
-        public static final int ivUserProfileAvatar=0x7f070006;
-        public static final int lvTweets=0x7f07000e;
-        public static final int menu_compose=0x7f070011;
-        public static final int menu_profile=0x7f070012;
-        public static final int menu_tweet=0x7f070013;
-        public static final int textView1=0x7f070009;
-        public static final int textView2=0x7f07000b;
-        public static final int tvFollowers=0x7f07000c;
-        public static final int tvFollowing=0x7f07000a;
-        public static final int tvTagLine=0x7f070008;
-        public static final int tvTweetContent=0x7f07000f;
-        public static final int tvTweetDate=0x7f070010;
+        public static final int ivUserProfileAvatar=0x7f070007;
+        public static final int lvTweets=0x7f07000f;
+        public static final int menu_compose=0x7f070012;
+        public static final int menu_profile=0x7f070013;
+        public static final int menu_tweet=0x7f070014;
+        public static final int progressBar=0x7f070004;
+        public static final int textView1=0x7f07000a;
+        public static final int textView2=0x7f07000c;
+        public static final int tvFollowers=0x7f07000d;
+        public static final int tvFollowing=0x7f07000b;
+        public static final int tvTagLine=0x7f070009;
+        public static final int tvTweetContent=0x7f070010;
+        public static final int tvTweetDate=0x7f070011;
         public static final int tvUserName=0x7f070001;
-        public static final int tvUserProfileName=0x7f070007;
+        public static final int tvUserProfileName=0x7f070008;
     }
     public static final class layout {
         public static final int activity_compose=0x7f030000;

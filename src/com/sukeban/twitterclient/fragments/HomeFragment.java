@@ -6,19 +6,16 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sukeban.twitterclient.R;
+import com.sukeban.twitterclient.RequestListener;
 import com.sukeban.twitterclient.TwitterApplication;
 import com.sukeban.twitterclient.TwitterClient;
 import com.sukeban.twitterclient.models.Tweet;
 
-public class HomeFragment extends TweetsListFragment {
+public class HomeFragment extends TweetsListFragment implements RequestListener {
 	
 	private ProgressBar progressBar;
 
@@ -31,24 +28,23 @@ public class HomeFragment extends TweetsListFragment {
             
         client = TwitterApplication.getRestClient();
         maxId = 0;
-        populateTimeline(true);
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = super.onCreateView(inflater, container, savedInstanceState);
-		//this.progressShowingActivity = (ProgressFragmentActivity)getActivity();
-		return v;
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		this.progressBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
+        populateTimeline(this, true);
 	}
 	
 	public void getMore() {
-		this.populateTimeline(false);
+		populateTimeline(this, false);
 	}
 	
-	public void populateTimeline(final boolean clear) {
-		
-		//progressShowingActivity.showProgressBar();
-			
+	public void populateTimeline(final RequestListener listener, final boolean clear) {
+
+		this.progressBar.setVisibility(ProgressBar.VISIBLE);
+					
 		client.getHomeFeed(maxId, new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable e, String s){
@@ -56,7 +52,7 @@ public class HomeFragment extends TweetsListFragment {
 				Log.d("debug", e.toString());
 				Log.d("debug", s.toString());
 				
-				//progressShowingActivity.hideProgressBar();
+				listener.requestFinished();
 			}
 				
 			@Override
@@ -81,8 +77,13 @@ public class HomeFragment extends TweetsListFragment {
 				}
 				addAll(Tweet.fromJson(jsonArray));
 					
-				//progressShowingActivity.hideProgressBar();
+				listener.requestFinished();
 			}
 		});
+	}
+	
+	@Override
+	public void requestFinished(){
+		this.progressBar.setVisibility(ProgressBar.INVISIBLE);
 	}
 }
